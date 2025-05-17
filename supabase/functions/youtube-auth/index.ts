@@ -3,8 +3,8 @@ import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
 
 // Constants for YouTube OAuth
-const YOUTUBE_CLIENT_ID = "355324126045-90gukff53jfpar1g3nge9vc912j1tpt3.apps.googleusercontent.com";
-const YOUTUBE_CLIENT_SECRET = "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";
+const YOUTUBE_CLIENT_ID = import.meta.env.YOUTUBE_CLIENT_ID || "";
+const YOUTUBE_CLIENT_SECRET = import.meta.env.YOUTUBE_CLIENT_SECRET || "";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 

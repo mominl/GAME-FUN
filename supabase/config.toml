@@ -1,0 +1,6 @@
+
+project_id = "ldtszaxczajgyugphacm"
+
+[functions.youtube-auth]
+verify_jwt = false
+

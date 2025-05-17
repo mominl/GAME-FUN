@@ -107,6 +107,12 @@ verify page
 ![alt text](image.png)
 
 Create mem
+![image](https://github.com/user-attachments/assets/3435b679-f0a8-49fc-a466-6b44de7203b0)
+
+Dasahboard
+![image](https://github.com/user-attachments/assets/65361c4b-80c9-4682-b18c-b70473c33183)
+
+
 
 
 

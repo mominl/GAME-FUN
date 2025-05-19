@@ -9,8 +9,7 @@ declare global {
   }
 }
 
-// Pinata configuration
-const PINATA_JWT = import.meta.env.VITE_PINATA_JWT;
+// Gateway URL is safe to expose - not a sensitive key
 const PINATA_GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || 'plum-real-turtle-247.mypinata.cloud';
 
 // Interfaces
@@ -35,15 +34,11 @@ export interface CreateTokenParams {
 }
 
 /**
- * Uploads an image to IPFS via Pinata through our proxy server
+ * Uploads an image to IPFS via secure API endpoint
  */
 export async function uploadImageToIPFS(image: File): Promise<string> {
   try {    
-    console.log('Starting image upload to IPFS via Pinata proxy...');
-    
-    // Use environment variable for server URL with fallback
-    const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://127.0.0.1:8787';
-    console.log('Using proxy server URL:', SERVER_URL);
+    console.log('Starting image upload to IPFS via secure API...');
     
     const formData = new FormData();
     
@@ -60,10 +55,16 @@ export async function uploadImageToIPFS(image: File): Promise<string> {
     });
     formData.append("keyvalues", keyvalues);
     
-    // Make the request to our proxy server
-    const request = await fetch(`${SERVER_URL}/upload-file`, {
+    // Make the request to our secure API endpoint that handles sensitive keys
+    const request = await fetch('/api/token-operations', {
       method: "POST",
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        operation: 'upload-to-ipfs',
+        data: formData
+      }),
     });
     
     const response = await request.json();
@@ -84,15 +85,11 @@ export async function uploadImageToIPFS(image: File): Promise<string> {
 }
 
 /**
- * Creates and uploads metadata JSON to IPFS via Pinata through our proxy server
+ * Creates and uploads metadata JSON to IPFS via secure API endpoint
  */
 export async function uploadMetadataToIPFS(metadata: TokenMetadata): Promise<string> {
   try {    
     console.log('Creating and uploading metadata JSON...');
-      
-    // Use environment variable for server URL with fallback
-    const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://127.0.0.1:8787';
-    console.log('Using proxy server URL for metadata upload:', SERVER_URL);
     
     // Create the metadata object with proper structure
     const metadataObj = {
@@ -126,19 +123,22 @@ export async function uploadMetadataToIPFS(metadata: TokenMetadata): Promise<str
       ]
     };
     
-    // Make the request to our proxy server
-    const request = await fetch(`${SERVER_URL}/upload-json`, {
+    // Make the request to our secure API endpoint
+    const request = await fetch('/api/token-operations', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        metadata: metadataObj,
-        name: `memecoin-metadata-${metadata.symbol}-${Date.now()}`,
-        keyvalues: {
-          app: "gamefun-memecoin",
-          type: "token-metadata",
-          tokenSymbol: metadata.symbol
+        operation: 'create-metadata',
+        data: {
+          metadata: metadataObj,
+          name: `memecoin-metadata-${metadata.symbol}-${Date.now()}`,
+          keyvalues: {
+            app: "gamefun-memecoin",
+            type: "token-metadata",
+            tokenSymbol: metadata.symbol
+          }
         }
       })
     });

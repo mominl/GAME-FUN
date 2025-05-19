@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Database } from './types';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseKey = import.meta.env.SUPABASE_ANON_KEY || '';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";

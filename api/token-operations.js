@@ -5,6 +5,9 @@ export default async function handler(req, res) {
   const PINATA_API_KEY = process.env.PINATA_API_KEY;
   const PINATA_API_SECRET = process.env.PINATA_API_SECRET;
   const PINATA_JWT = process.env.PINATA_JWT;
+  const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+  const YOUTUBE_CLIENT_ID = process.env.YOUTUBE_CLIENT_ID;
+  const YOUTUBE_CLIENT_SECRET = process.env.YOUTUBE_CLIENT_SECRET;
   
   // Only allow POST requests
   if (req.method !== 'POST') {

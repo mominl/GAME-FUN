@@ -13,16 +13,16 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex space-x-6 mb-6 md:mb-0">
-            <a href="#" className="text-gray-400 hover:text-neon-purple transition-colors">
+            <a href="https://x.com/Mustafa3Murtuza" className="text-gray-400 hover:text-neon-purple transition-colors">
               Twitter
             </a>
-            <a href="#" className="text-gray-400 hover:text-neon-purple transition-colors">
+            <a href="https://discord.gg/xGKSA38Y" className="text-gray-400 hover:text-neon-purple transition-colors">
               Discord
             </a>
             <a href="#" className="text-gray-400 hover:text-neon-purple transition-colors">
               Medium
             </a>
-            <a href="#" className="text-gray-400 hover:text-neon-purple transition-colors">
+            <a href="https://github.com/mominl" className="text-gray-400 hover:text-neon-purple transition-colors">
               GitHub
             </a>
           </div>
